@@ -6,9 +6,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      POSTGRES_DB: myproject
-      POSTGRES_USER: myprojectuser
-      POSTGRES_PASSWORD: myprojectpassword
+      POSTGRES_DB: app_db
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: app_password
 
   web:
     build: .
@@ -21,9 +21,9 @@ services:
       DATABASE: "postgres"
       SQL_HOST: db
       SQL_PORT: 5432
-      SQL_USER: myprojectuser
-      SQL_PASSWORD: myprojectpassword
-      SQL_DB: myproject
+      SQL_USER: app_user
+      SQL_PASSWORD: app_password
+      SQL_DB: app_db
     depends_on:
       - db
 

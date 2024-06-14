@@ -67,7 +67,7 @@ WSGI_APPLICATION = "app.wsgi.application"
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f'postgres://{os.environ.get("SQL_USER")}:{os.environ.get("SQL_PASSWORD")}@{os.environ.get("SQL_HOST")}:{os.environ.get("SQL_PORT")}/{os.environ.get("SQL_DB")}'
+        default=f'postgres://{os.environ.get("SQL_USER", "app_user")}:{os.environ.get("SQL_PASSWORD", "app_password")}@{os.environ.get("SQL_HOST", "db")}:{os.environ.get("SQL_PORT", "5432")}/{os.environ.get("SQL_DB", "app_db")}'
     )
 }
 
