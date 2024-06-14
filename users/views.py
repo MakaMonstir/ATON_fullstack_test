@@ -16,7 +16,7 @@ def login_view(request):
             return redirect('clients')
     else:
         form = AuthenticationForm()
-    return render(request, 'myapp/login.html', {'form': form})
+    return render(request, 'users/login.html', {'form': form})
 
 @login_required
 def clients_view(request):
