@@ -1,0 +1,31 @@
+version: '1.0'
+
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: myproject
+      POSTGRES_USER: myprojectuser
+      POSTGRES_PASSWORD: myprojectpassword
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE: "postgres"
+      SQL_HOST: db
+      SQL_PORT: 5432
+      SQL_USER: myprojectuser
+      SQL_PASSWORD: myprojectpassword
+      SQL_DB: myproject
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
