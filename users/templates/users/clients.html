@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Clients</title>
-</head>
-<body>
+  </head>
+  <body>
     <h2>Clients</h2>
+    <a href="{% url 'logout' %}">Logout</a>
+    <!-- Add logout button -->
     <table>
-        <tr>
-            <th>Account Number</th>
-            <th>Name</th>
-            <th>Birth Date</th>
-            <th>INN</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-        {% for client in clients %}
-        <tr>
-            <td>{{ client.account_number }}</td>
-            <td>{{ client.last_name }} {{ client.first_name }} {{ client.middle_name }}</td>
-            <td>{{ client.birth_date }}</td>
-            <td>{{ client.inn }}</td>
-            <td>{{ client.status }}</td>
-            <td>
-                <a href="{% url 'update_status' client.id 'В работе' %}">В работе</a>
-                <a href="{% url 'update_status' client.id 'Отказ' %}">Отказ</a>
-                <a href="{% url 'update_status' client.id 'Сделка закрыта' %}">Сделка закрыта</a>
-            </td>
-        </tr>
-        {% endfor %}
+      <tr>
+        <th>Account Number</th>
+        <th>Name</th>
+        <th>Birth Date</th>
+        <th>INN</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      {% for client in clients %}
+      <tr>
+        <td>{{ client.account_number }}</td>
+        <td>
+          {{ client.last_name }} {{ client.first_name }} {{ client.middle_name
+          }}
+        </td>
+        <td>{{ client.birth_date }}</td>
+        <td>{{ client.inn }}</td>
+        <td>{{ client.status }}</td>
+        <td>
+          <a href="{% url 'update_status' client.id 'В работе' %}">В работе</a>
+          <a href="{% url 'update_status' client.id 'Отказ' %}">Отказ</a>
+          <a href="{% url 'update_status' client.id 'Сделка закрыта' %}"
+            >Сделка закрыта</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
     </table>
-</body>
+  </body>
 </html>
