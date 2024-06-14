@@ -3,17 +3,20 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import Client
 from .forms import UserLoginForm
+from django.contrib.auth.forms import AuthenticationForm
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('clients')  # Redirect if already logged in
     if request.method == 'POST':
-        form = UserLoginForm(request, data=request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('clients')
+            return redirect('clients')  # Redirect to clients page after login
     else:
-        form = UserLoginForm()
-    return render(request, 'users/login.html', {'form': form})
+        form = AuthenticationForm()
+    return render(request, 'myapp/login.html', {'form': form})
 
 @login_required
 def clients_view(request):
